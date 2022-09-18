@@ -1,5 +1,17 @@
 import argparse
 
+
+def iswrong(x):
+    if x.isdigit() or x == '+' or x == '-':
+        return False
+    return True
+
+
+def issign(x):
+    if x == '+' or x == '-':
+        return True
+    return False
+
 parser = argparse.ArgumentParser()
 
 parser.add_argument('f')
@@ -8,21 +20,41 @@ args = parser.parse_args()
 f = args.f;
 
 r = 0
+t = '0'
 
 d = 1
 i = 0
-prev_sing = 0
-j =
-while d:
-    if not(f[i].isdigit()):
+prev_sign = 0
+last_sing = '+'
+
+while d and i < len(f):
+    if f[i].isdigit():
+        prev_sign = 0
+        t += f[i]
+    elif issign(f[i]):
+        if prev_sign:
+            d = 0
+        elif last_sing == '+':
+            r += int(t)
+        elif last_sing == '-':
+            r -= int(t)
+        last_sing = f[i]
+        prev_sign = 1
+        t = '';
+    else:
         d = 0
-        break
+    i += 1
 
-
-
+if f[i - 1].isdigit():
+    if last_sing == '+':
+        r += int(t)
+    if last_sing == '-':
+        r -= int(t)
+else:
+    d = 0
 
 
 if d:
-    print('(TRUE, ' + r + ')');
+    print('(TRUE, ' + str(r) + ')');
 else:
-    print('FALSE, NONE)')
+    print('(FALSE, NONE)')
