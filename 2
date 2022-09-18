@@ -1,26 +1,23 @@
 import argparse
+import math
+import operator
 
 parser = argparse.ArgumentParser()
 
-
 parser.add_argument('f')
-parser.add_argument('x', type=int)
-parser.add_argument('y', type=int)
+parser.add_argument('x', type=float, nargs='+')
 
 args = parser.parse_args()
-f = args.f;
-x = args.x;
-y = args.y;
+f = args.f
+x = args.x
 
+try:
+    a = getattr(operator, f)
+    print(a(*x))
+except AttributeError:
+    try:
+        a = getattr(math, f)
+        print(a(*x))
+    except AttributeError:
+        print("失敗")
 
-if args.f == 'add':
-    print(x + y)
-
-if args.f == 'subtract':
-    print(x - y)
-
-if args.f == 'multiply':
-    print(x * y)
-
-if args.f == 'divide':
-    print(x / y)
