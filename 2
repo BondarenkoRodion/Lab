@@ -18,6 +18,8 @@ try:
     elif hasattr(math, f):
         a = getattr(math, f)
         print(a(*x))
+    else:
+        print("Unknown function")
 except Exception:
     print("失敗")
 
