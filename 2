@@ -12,13 +12,12 @@ f = args.f
 x = args.x
 
 try:
-    a = getattr(operator, f)
-    
-    a = getattr(math, f)
-    if a:
-        return print(a(*x))
-except AttributeError:
-    try:
-    except AttributeError:
-        print("失敗")
+    if hasattr(operator, f):
+        a = getattr(operator, f)
+        print(a(*x))
+    elif hasattr(math, f):
+        a = getattr(math, f)
+        print(a(*x))
+except Exception:
+    print("失敗")
 
