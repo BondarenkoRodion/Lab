@@ -20,6 +20,9 @@ elif args.f == '-':
 elif args.f == '*':
     print(x * y)
 elif args.f == '/':
-    print(x / y)
+    if y == 0:
+        print("division by 0")
+    else:
+        print(x / y)
 else:
     print("Unknown operator")
